@@ -27,16 +27,13 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var characterCountBarButtonLabel: UIBarButtonItem!
     @IBOutlet weak var bottomScreenConstraint: NSLayoutConstraint!
     
-    
-    
-
     @IBAction func onCancelButton(_ sender: UIBarButtonItem) {
         navigateFromThisViewController()
     }
     @IBAction func onReplyButton(_ sender: UIBarButtonItem) {
-        var newTweetId = 0
+        var newTweetId = ""
         if tweet != nil {
-            TwitterClient.sharedInstance?.replyTweet(message: tweetText, id: self.tweet.id!, success: { (newId: Int) in
+            TwitterClient.sharedInstance?.replyTweet(message: tweetText, id: self.tweet.id!, success: { (newId: String) in
                 newTweetId = newId
             })
             let tweet = Tweet(tweetText: tweetText, newId: newTweetId)

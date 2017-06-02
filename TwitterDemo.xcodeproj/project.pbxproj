@@ -179,7 +179,6 @@
 				TargetAttributes = {
 					D10C501D1EA019CD00711E7C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 469Q3T2DQS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -399,7 +398,7 @@
 			baseConfigurationReference = E20936CD200B654521AFCF63 /* Pods-TwitterDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 469Q3T2DQS;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwitterDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.poojachow.TwitterDemo;
@@ -413,7 +412,7 @@
 			baseConfigurationReference = 3F05311461971C59C0620847 /* Pods-TwitterDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 469Q3T2DQS;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = TwitterDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.poojachow.TwitterDemo;

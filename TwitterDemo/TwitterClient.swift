@@ -12,7 +12,7 @@ import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
     
-    static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "XXXXXX", consumerSecret: "XXXXX")
+    static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "XXXX", consumerSecret: "XXXX")
     
     var loginSuccess: (() -> ())?
     var loginFailure: ((Error) -> ())?
@@ -61,16 +61,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-//    func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (NSError) -> ()) {
-//        get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-//            let dictionaries = response as! [NSDictionary]
-//            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
-//            success(tweets)
-//        }, failure: { (task: URLSessionDataTask?, error: Error) in
-//            print("Error: \(error)")
-//        })
-//    }
-    
     func homeTimeline(success: @escaping ([Tweet]) -> (), failure: (NSError) -> ()) {
 //        var dictionary: NSDictionary!
 //        if maxid == nil {
@@ -100,11 +90,16 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func composeNewTweet(dictionary: NSDictionary, success: @escaping (Int) -> ()) {
+    func composeNewTweet(dictionary: NSDictionary, success: @escaping (String) -> ()) {
         post("1.1/statuses/update.json", parameters: dictionary, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             let userDictionary = response as! NSDictionary
-            let newId = userDictionary["id"] as? Int
+       //     let newId = userDictionary["id"] as? Int
+            let newId = userDictionary["id_str"] as? String
+            print(userDictionary)
+            print("newID is \(newId)")
             success(newId!)
+
+        //    success(userDictionary)
         }) { (task: URLSessionDataTask?, error: Error) in
             print("Error: \(error.localizedDescription)")
         }
@@ -128,7 +123,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-       func destroyRetweet(id: Int, success: @escaping (Bool) -> ()) {
+    func destroyRetweet(id: String, success: @escaping (Bool) -> ()) {
         post("1.1/statuses/unretweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
 
             success(true)
@@ -137,8 +132,8 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("Error: \(error)")
         }
     }
-    
-    func createRetweet(id: Int, success: @escaping (Bool) -> ()) {
+
+    func createRetweet(id: String, success: @escaping (Bool) -> ()) {
         post("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
 
             success(true)
@@ -147,11 +142,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func replyTweet(message: String, id: Int, success: @escaping (Int) -> ()) {
+    func replyTweet(message: String, id: String, success: @escaping (String) -> ()) {
         let dictionary = ["status": message, "in_reply_to_status_id": id] as NSDictionary
         post("1.1/statuses/update.json", parameters: dictionary, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             let userDictionary = response as! NSDictionary
-            let newId = userDictionary["id"] as? Int
+            let newId = userDictionary["id"] as? String
             success(newId!)
             
         }) { (task: URLSessionDataTask?, error: Error) in

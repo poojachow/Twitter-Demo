@@ -10,7 +10,7 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeTweetViewControllerDelegate, ReplyViewControllerDelegate, UIScrollViewDelegate {
     @objc internal func sendTweet(sentTweet: Tweet) {
-     //   print("Yayyyy \(sentTweet.text)")
+        print("Yayyyy \(sentTweet.text)")
     }
 
     var isMoreDataLoading = false
@@ -102,6 +102,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let indexpath = tableView.indexPath(for: cell)
             let destinationVC = segue.destination as! TweetDetailViewController
             destinationVC.tweet = tweets[(indexpath?.row)!]
+            print(destinationVC.tweet.id)
         }
     }
     

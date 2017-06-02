@@ -32,11 +32,12 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func onSaveButton(_ sender: UIBarButtonItem) {
         let dictionary = ["status": tweetText]
-        var newTweetId = 0
-        TwitterClient.sharedInstance?.composeNewTweet(dictionary: dictionary as NSDictionary, success: { (newId: Int) in
+        var newTweetId = ""
+        TwitterClient.sharedInstance?.composeNewTweet(dictionary: dictionary as NSDictionary, success: { (newId: String) in
             newTweetId = newId
         })
         let tweet = Tweet(tweetText: tweetText, newId: newTweetId)
+
         delegate?.sendTweet!(sentTweet: tweet)
         navigateFromThisViewController()
     }
